@@ -1,15 +1,3 @@
-buildscript {
-	repositories {
-		jcenter()
-		flatDir {
-			dirs 'lib'
-		}
-	}
-	dependencies {
-		classpath "com.github.jengelman.gradle.plugins:shadow:5.0.0"
-	}
-
-}
 
 
 plugins {
@@ -17,7 +5,6 @@ plugins {
 	id 'maven-publish'
 }
 
-apply plugin: 'com.github.johnrengelman.shadow'
 
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
@@ -30,15 +17,6 @@ archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
-configurations {
-	shade
-	compile.extendsFrom(shade)
-}
-shadowJar {
-	classifier = 'shaded'
-	configurations = [project.configurations.shade]
-	exclude 'com/sun/jna/**'
-}
 
 
 repositories {
@@ -56,13 +34,9 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	implementation "club.minnced:java-discord-rpc:2.0.1"
-	include "club.minnced:java-discord-rpc:2.0.1"
+	implementation fileTree(dir: 'lib' , include: '*.jar')
+	include fileTree(dir: 'lib' , include: '*.jar')
 
-	compile 'club.minnced:java-discord-rpc:2.0.1'
-	compile fileTree(dir: 'lib' , include: '*.jar')
-
-	shade 'club.minnced:java-discord-rpc:2.0.1'
 }
 processResources {
 	inputs.property "version", project.version
@@ -77,9 +51,6 @@ processResources {
 	}
 }
 
-artifacts {
-	archives tasks.shadowJar
-}
 
 
 tasks.withType(JavaCompile) {
