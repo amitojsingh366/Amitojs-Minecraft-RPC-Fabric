@@ -7,6 +7,7 @@ This is a simple [Minecraft Fabric](https://fabricmc.net) mod that shows what yo
 ### Install Using Precompiled JARs
 - You can download the prebuilt jar from any of the [Releases](https://github.com/amitojsingh366/Amitojs-Minecraft-RPC-Fabric/releases/) Above *(Make sure to download the "shaded" version)*
 - Copy the JAR into your Minecraft Mods folder
+- Ensure [Fabric-Api](https://www.curseforge.com/minecraft/mc-mods/fabric-api) is in mods folder
 - Run the game using the [Fabric Loader](https://fabricmc.net/use/)!
 ### Compile it yourself from source
 - Install [git](https://git-scm.com/downloads) and [JDK 8+](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
