@@ -37,6 +37,7 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
+	include(implementation ('club.minnced:discord-rpc-release:v3.4.0'))
 	include(implementation("com.github.MinnDevelopment:java-discord-rpc:v2.0.2"))
 
 }
