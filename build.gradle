@@ -18,12 +18,15 @@ version = project.mod_version
 group = project.maven_group
 
 
-
 repositories {
-	flatDir {
-		dirs 'lib'
+	maven {
+		url = "https://jitpack.io/"
+		content {
+			includeGroup("com.github.MinnDevelopment")
+		}
 	}
 }
+
 
 dependencies {
 	// To change the versions see the gradle.properties file
@@ -34,8 +37,7 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	implementation fileTree(dir: 'lib' , include: '*.jar')
-	include fileTree(dir: 'lib' , include: '*.jar')
+	include(implementation("com.github.MinnDevelopment:java-discord-rpc:v2.0.2"))
 
 }
 processResources {
@@ -75,9 +77,6 @@ jar {
 publishing {
 	repositories {
 		jcenter()
-		flatDir {
-			dirs 'lib'
-		}
 	}
 	publications {
 		mavenJava(MavenPublication) {
@@ -95,8 +94,5 @@ publishing {
 	// To publish to maven local, no extra repositories are necessary. Just use the task `publishToMavenLocal`.
 	repositories {
 		jcenter()
-		flatDir {
-			dirs 'lib'
-		}
 	}
 }
