@@ -16,6 +16,12 @@ group = project.maven_group
 
 
 
+repositories {
+	flatDir {
+		dirs 'lib'
+	}
+}
+
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -27,13 +33,6 @@ dependencies {
 
 	implementation "club.minnced:java-discord-rpc:2.0.1"
 	include "club.minnced:java-discord-rpc:2.0.1"
-	/* include "club.minnced:java-discord-rpc:2.0.1"
-	compile 'club.minnced:java-discord-rpc:2.0.1'
-	compile fileTree(dir: 'lib' , include: '*.jar')
-
-	shade 'club.minnced:java-discord-rpc:2.0.1' */
-	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
-	// You may need to force-disable transitiveness on them.
 }
 processResources {
 	inputs.property "version", project.version
