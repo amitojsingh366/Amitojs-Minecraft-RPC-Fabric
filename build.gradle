@@ -1,0 +1,97 @@
+
+
+plugins {
+	id 'fabric-loom' version '0.5-SNAPSHOT'
+	id 'maven-publish'
+}
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+compileJava.options.encoding = 'UTF-8'
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+archivesBaseName = project.archives_base_name
+version = project.mod_version
+group = project.maven_group
+
+
+
+dependencies {
+	// To change the versions see the gradle.properties file
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+	// Fabric API. This is technically optional, but you probably want it anyway.
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	implementation "club.minnced:java-discord-rpc:2.0.1"
+	include "club.minnced:java-discord-rpc:2.0.1"
+	/* include "club.minnced:java-discord-rpc:2.0.1"
+	compile 'club.minnced:java-discord-rpc:2.0.1'
+	compile fileTree(dir: 'lib' , include: '*.jar')
+
+	shade 'club.minnced:java-discord-rpc:2.0.1' */
+	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
+	// You may need to force-disable transitiveness on them.
+}
+processResources {
+	inputs.property "version", project.version
+
+	from(sourceSets.main.resources.srcDirs) {
+		include "fabric.mod.json"
+		expand "version": project.version
+	}
+
+	from(sourceSets.main.resources.srcDirs) {
+		exclude "fabric.mod.json"
+	}
+}
+
+tasks.withType(JavaCompile) {
+	options.encoding = "UTF-8"
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+	classifier = "sources"
+	from sourceSets.main.allSource
+}
+
+
+
+jar {
+	from "LICENSE"
+}
+
+
+
+
+// configure the maven publication
+publishing {
+	repositories {
+		jcenter()
+		flatDir {
+			dirs 'lib'
+		}
+	}
+	publications {
+		mavenJava(MavenPublication) {
+			// add all the jars that should be included when publishing to maven
+			artifact(remapJar) {
+				builtBy remapJar
+			}
+			artifact(sourcesJar) {
+				builtBy remapSourcesJar
+			}
+		}
+	}
+
+	// Select the repositories you want to publish to
+	// To publish to maven local, no extra repositories are necessary. Just use the task `publishToMavenLocal`.
+	repositories {
+		jcenter()
+		flatDir {
+			dirs 'lib'
+		}
+	}
+}
