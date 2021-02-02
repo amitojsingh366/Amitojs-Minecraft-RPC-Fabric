@@ -13,7 +13,7 @@ This is a simple [Minecraft Fabric](https://fabricmc.net) mod that shows what yo
 - `git clone https://github.com/amitojsingh366/Amitojs-Minecraft-RPC-Fabric`
 - `cd Amitojs-Minecraft-RPC-Fabric`
 - `./gradlew build` or on windows `gradlew build`
-- Get the jar from `build/libs` with the name `amitojs-minecraft-rpc-fabric-%VERSION%-shaded.jar`
+- Get the jar from `build/libs` with the name `amitojs-minecraft-rpc-fabric-%VERSION%.jar`
 - Copy The JAR to your Minecraft Mods folder
 - Run the game using the [Fabric Loader](https://fabricmc.net/use/)!
   
