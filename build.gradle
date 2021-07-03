@@ -1,7 +1,7 @@
 
 
 plugins {
-	id 'fabric-loom' version '0.5-SNAPSHOT'
+	id 'fabric-loom' version '0.7-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -19,6 +19,7 @@ group = project.maven_group
 
 
 repositories {
+	jcenter()
 	maven {
 		url = "https://jitpack.io/"
 		content {
