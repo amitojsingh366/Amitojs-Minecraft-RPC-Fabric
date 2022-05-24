@@ -1,4 +1,7 @@
 # Amitoj's Minecraft RPC
+
+## Updated to work on 1.17 through to current release
+
 This is a simple [Minecraft Fabric](https://fabricmc.net) mod that shows what you're doing in game as a [Discord Rich Presence](https://discord.com/rich-presence)
 
 
